@@ -68,8 +68,9 @@ button:active {
     display: grid;
     margin: 1em;
     grid-template-columns: 0.1fr 1fr 0.1fr;
+    grid-template-rows: 0.1fr 1fr;
     place-items: center;
-    width: 95vw;
+    width: 99vw;
 }
 
 #bio {
@@ -79,6 +80,7 @@ button:active {
 
 #bioText {
     border: none;
+    border-radius: 1em;
     width: 12em;
     height: 6em;
     text-shadow: rgba(255, 0, 136, 0.7) 0 1px, rgba(0, 200, 255, 0.7) 0 -1px;
@@ -94,7 +96,7 @@ button:active {
     grid-column-start: 1;
 }
 
-#profilePic {
+#profileComponent > .profilePic {
     border-radius: 50%;
     height: 13em;
     width: 13em;
@@ -102,7 +104,7 @@ button:active {
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
-#miniPic {
+.profilePic {
     border-radius: 50%;
     height: 4em;
     width: 4em;

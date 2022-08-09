@@ -43,7 +43,6 @@ class Login extends Component {
         })
             .then((result) => result.json())
             .then((data) => {
-                console.log(data);
                 if (data.success == true) {
                     location.href = "/";
                 } else {

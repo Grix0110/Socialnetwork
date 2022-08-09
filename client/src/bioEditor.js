@@ -20,7 +20,6 @@ export default class BioEditor extends Component {
     }
 
     fetchNewBioToServer() {
-        //POST Fetch request to server, when success, save the new Bio
         const userData = { bio: this.state.bio };
         fetch("./updateBio", {
             method: "post",
@@ -45,9 +44,10 @@ export default class BioEditor extends Component {
                     <>
                         <textarea
                             id="bioText"
-                            name="bio"
+                            name="draftBio"
                             cols="30"
                             rows="10"
+                            onChange={this.onFormInputChange}
                         ></textarea>
                         <button onClick={this.showEditor}>Cancel</button>
                     </>

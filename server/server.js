@@ -177,6 +177,7 @@ app.post(
             })
             .catch(
                 (err) => console.log("ERROR in update Profile: ", err),
+                res.json({ success: false, message: "something went wrong, please try again" })
             );
     }
 );

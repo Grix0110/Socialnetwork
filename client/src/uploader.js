@@ -24,7 +24,6 @@ export default class Uploader extends Component {
         })
             .then((result) => result.json())
             .then((data) => {
-                console.log("SERVER DATA: ", data);
                 this.setState(data);
                 location.reload();
             })

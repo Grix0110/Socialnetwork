@@ -1,8 +1,9 @@
 import { Component } from "react";
 // import Logo from "./logo";
 import ProfilePic from "./profilePic";
-import Uploader from "./uploader";
-import BioEditor from "./bioEditor";
+import Profile from "./Profile";
+// import Uploader from "./uploader";
+
 
 export default class App extends Component {
     constructor(props) {
@@ -12,10 +13,11 @@ export default class App extends Component {
             firstName: "",
             lastName: "",
             picture: "",
-            bio: "some bio",
+            bio: "",
         };
         this.togglePopup = this.togglePopup.bind(this);
         this.changeName = this.changeName.bind(this);
+        this.saveDraftBioToApp = this.saveDraftBioToApp.bind(this);
     }
 
     componentDidMount() {
@@ -40,7 +42,8 @@ export default class App extends Component {
         this.setState({ isPopupOpen: !this.state.isPopupOpen });
     }
 
-    setBio(bio) {
+    saveDraftBioToApp(bio) {
+        console.log(this.state.bio);
         this.setState({ bio: bio });
     }
 
@@ -48,10 +51,6 @@ export default class App extends Component {
         return (
             <div id="profileCon">
                 {/* <Logo /> */}
-                <h1 id="usernameBig">
-                    {this.state.firstName} {this.state.lastName}
-                </h1>
-                <img id="miniPic" src={this.state.picture} alt={this.state.firstName}></img>
                 <ProfilePic
                     togglePopup={this.togglePopup}
                     // changeName={this.changeName}
@@ -59,14 +58,16 @@ export default class App extends Component {
                     lastName={this.state.lastName}
                     picture={this.state.picture}
                 />
-                {this.state.isPopupOpen && (
-                    <Uploader
-                        firstName={this.state.firstName}
-                        lastName={this.state.lastName}
-                        uploadPicture={this.uploadPicture}
-                    />
-                )}
-                <BioEditor bio={this.state.bio} />
+                <Profile
+                    togglePopup={this.togglePopup}
+                    picture={this.state.picture}
+                    firstName={this.state.firstName}
+                    lastName={this.state.lastName}
+                    bio={this.state.bio}
+                    saveDraft={this.saveDraftBioToApp}
+                    uploadPicture={this.uploadPicture}
+                    isPopupOpen={this.state.isPopupOpen}
+                />
             </div>
         );
     }
