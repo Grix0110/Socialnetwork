@@ -1,14 +1,22 @@
 // import React from "react";
 
-export default function ProfilePic({ togglePopup, changeName }) {
-    // console.log("PROPS in profilePic: ", props);
-
-    // imgFromApp = imgFromApp || "/default.png";
-
+export default function ProfilePic({
+    firstName,
+    lastName,
+    picture,
+    togglePopup,
+}) {
     return (
         <>
-            <button onClick={togglePopup}>Toggle Popup</button>
-            <button onClick={() => changeName("Spiced")}>Change Name</button>
+            <img
+                id="profilePic"
+                onClick={togglePopup}
+                src={
+                    picture ||
+                    "./png-transparent-social-media-icons-avatar-user-profile-login-black-circle-silhouette-symbol.png"
+                }
+                alt={firstName + " " + lastName}
+            ></img>
         </>
     );
 }

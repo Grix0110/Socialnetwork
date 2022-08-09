@@ -11,6 +11,3 @@ fetch("/user/id.json")
             ReactDOM.render(<App />, document.querySelector("main"));
         }
     });
-// .catch(() => {
-//     ReactDOM.render(<Welcome />, document.querySelector("main"));
-// });

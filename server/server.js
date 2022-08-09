@@ -2,9 +2,11 @@ const express = require("express");
 const app = express();
 const compression = require("compression");
 const path = require("path");
-const db = require("../db");
+const db = require("./db");
 const secretCode = require("crypto-random-string");
-const ses = require("../ses");
+const ses = require("./ses");
+const { uploader } = require("./middleware");
+const s3 = require("./s3");
 const cookieSession = require("cookie-session");
 const COOKIE_SECRET =
     process.env.COOKIE_SECRET || require("../secrets.json").COOKIE_SECRET;
@@ -24,6 +26,16 @@ app.get("/user/id.json", function (req, res) {
     res.json({
         userId: req.session.userId,
     });
+});
+
+app.get("/user", function (req, res) {
+    db.getUser(req.session.userId)
+        .then((result) => {
+            return res.json(result.rows[0]);
+        })
+        .catch((err) => {
+            console.log("ERROR in get User: ", err);
+        });
 });
 
 app.post("/register", (req, res) => {
@@ -84,14 +96,6 @@ app.post("/login", (req, res) => {
                 message: "something went wrong, please try again!",
             });
         });
-});
-
-app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "..", "client", "index.html"));
-});
-
-app.listen(process.env.PORT || 3001, function () {
-    console.log("I'm listening.");
 });
 
 app.post("/sendingCode", (req, res) => {
@@ -157,4 +161,35 @@ app.post("/resetPassword", (req, res) => {
                 message: "your Code was either too old or not found!",
             })
         );
+});
+
+app.post(
+    "/update-pic",
+    uploader.single("profilePicture"),
+    s3.upload,
+    (req, res) => {
+        let imageUrl = `https://s3.amazonaws.com/spicedling/${req.file.filename}`;
+        let id = req.session.userId;
+        db.updateProfilePic(imageUrl, id)
+            .then((input) => {
+                console.log(input.rows[0].image_url);
+                res.json({ picture: imageUrl });
+            })
+            .catch(
+                (err) => console.log("ERROR in update Profile: ", err),
+            );
+    }
+);
+
+app.post("/updateBio", (req, res) => {
+    console.log("BIOGRAPHY: ", req.body.bio);
+    res.json({ bio: req.body.bio });
+});
+
+app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "..", "client", "index.html"));
+});
+
+app.listen(process.env.PORT || 3001, function () {
+    console.log("I'm listening.");
 });

@@ -41,7 +41,7 @@ export default class ResetPassword extends Component {
         })
             .then((result) => result.json())
             .then((data) => {
-                console.log(data);
+                // console.log(data);
                 if (data.success == true) {
                     this.setState({ view: 2, message: data.message });
                 } else {
@@ -68,7 +68,7 @@ export default class ResetPassword extends Component {
         })
             .then((result) => result.json())
             .then((data) => {
-                console.log(data);
+                // console.log(data);
                 if (data.success == true) {
                     this.setState({ view: 3, message: data.message });
                 } else {

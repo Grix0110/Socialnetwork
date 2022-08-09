@@ -30,9 +30,6 @@ class Login extends Component {
 
     onFormSubmit(e) {
         e.preventDefault();
-        // if(!this.validateFields()){
-        //     return;
-        // }
         const userData = {
             email: this.state.email,
             password: this.state.password,

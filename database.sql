@@ -12,3 +12,7 @@ CREATE TABLE reset_codes(
     code VARCHAR NOT NULL,
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+ALTER TABLE users ADD image_url VARCHAR;
+
+ALTER TABLE users ADD bio VARCHAR;

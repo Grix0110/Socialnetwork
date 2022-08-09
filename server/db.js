@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === "production") {
         DB_HOST,
         DB_PORT,
         DB_BASE,
-    } = require("./secrets.json");
+    } = require("../secrets.json");
     databaseUrl = `postgres:${DB_NAME}:${DB_PW}@${DB_HOST}:${DB_PORT}/${DB_BASE}`;
 }
 
@@ -22,6 +22,10 @@ function hashPassword(password) {
         return bcrypt.hash(password, salt);
     });
 }
+
+module.exports.getUser = (id) => {
+    return db.query(`SELECT * FROM users WHERE id = $1`, [id]);
+};
 
 module.exports.insertUser = (first, last, email, pword) => {
     return hashPassword(pword).then((hashedPassword) => {
@@ -60,3 +64,19 @@ module.exports.updatePassword = (pword, email) => {
         );
     });
 };
+
+module.exports.updateProfilePic = (imageUrl, id) => {
+    return db.query(
+        `
+    UPDATE users SET image_url=$1 WHERE id=$2 RETURNING image_url`,
+        [imageUrl, id]
+    );
+};
+
+module.exports.insertBio = (bio, id) => {
+    return db.query(`UPDATE users SET bio=$1 WHERE id=$2 RETURNING bio`, [
+        bio,
+        id,
+    ]);
+};
+
