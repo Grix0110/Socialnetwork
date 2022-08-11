@@ -10,10 +10,10 @@ export default class Uploader extends Component {
         this.uploadPicture = this.uploadPicture.bind(this);
     }
 
-    componentDidMount() {
-        console.log("uploader mounted!");
-    }
-
+    // componentDidMount() {
+    //     console.log("uploader mounted!");
+    // }
+    
     uploadPicture(e) {
         e.preventDefault();
         const form = e.currentTarget;
@@ -29,6 +29,7 @@ export default class Uploader extends Component {
             })
             .catch((err) => console.log("ERROR in FormSubmit: ", err));
     }
+
 
     render() {
         return (

@@ -177,14 +177,39 @@ app.post(
             })
             .catch(
                 (err) => console.log("ERROR in update Profile: ", err),
-                res.json({ success: false, message: "something went wrong, please try again" })
+                res.json({
+                    success: false,
+                    message: "something went wrong, please try again",
+                })
             );
     }
 );
 
 app.post("/updateBio", (req, res) => {
-    console.log("BIOGRAPHY: ", req.body.bio);
-    res.json({ bio: req.body.bio });
+    let biography = req.body.bio;
+    let id = req.session.userId;
+    db.insertBio(biography, id)
+        .then((data) => {
+            res.json(data.rows[0]);
+        })
+        .catch((err) => console.log("ERROR in insert BIO: ", err));
+});
+
+app.get("/getPeople", (req, res) => {
+    db.findNewestPeople()
+        .then((data) => {
+            res.json(data.rows);
+        })
+        .catch((err) => console.log("ERROR in find newest people: ", err));
+});
+
+app.get("/getPeople/:name", (req, res) => {
+    let input = req.params.name;
+    db.findPeople(input)
+        .then((result) => {
+            res.json(result.rows);
+        })
+        .catch((err) => console.log("ERROR in find people: ", err));
 });
 
 app.get("*", function (req, res) {

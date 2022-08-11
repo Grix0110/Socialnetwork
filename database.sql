@@ -3,7 +3,7 @@ CREATE TABLE users (
     first_name VARCHAR(255) NOT NULL CHECK (first_name <> ''),
     last_name VARCHAR(255) NOT NULL CHECK (last_name <> ''),
     email VARCHAR UNIQUE NOT NULL CHECK (email <> ''),
-    pword VARCHAR UNIQUE NOT NULL CHECK (pword <> '')
+    pword VARCHAR NOT NULL CHECK (pword <> '')
 );
 
 CREATE TABLE reset_codes(
@@ -16,3 +16,7 @@ CREATE TABLE reset_codes(
 ALTER TABLE users ADD image_url VARCHAR;
 
 ALTER TABLE users ADD bio VARCHAR;
+
+ALTER TABLE users DROP pword;
+
+ALTER TABLE users ADD pword VARCHAR NOT NULL CHECK (pword <> '');

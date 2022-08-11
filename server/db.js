@@ -80,3 +80,12 @@ module.exports.insertBio = (bio, id) => {
     ]);
 };
 
+module.exports.findNewestPeople = () => {
+    return db.query(`SELECT * FROM users ORDER BY id DESC LIMIT 3`);
+};
+
+module.exports.findPeople = (input) => {
+    return db.query(`SELECT * FROM users WHERE first_name ILIKE $1;`, [
+        input + "%",
+    ]);
+};

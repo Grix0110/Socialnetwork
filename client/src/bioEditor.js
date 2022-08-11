@@ -6,6 +6,7 @@ export default class BioEditor extends Component {
         this.state = { draftBio: "", isEditorVisible: false, bio: props.bio };
         this.showEditor = this.showEditor.bind(this);
         this.onFormInputChange = this.onFormInputChange.bind(this);
+        this.fetchNewBioToServer = this.fetchNewBioToServer.bind(this);
     }
 
     showEditor() {
@@ -20,8 +21,9 @@ export default class BioEditor extends Component {
     }
 
     fetchNewBioToServer() {
+        this.showEditor();
         const userData = { bio: this.state.bio };
-        fetch("./updateBio", {
+        fetch("/updateBio", {
             method: "post",
             headers: {
                 "Content-Type": "application/json",
@@ -30,11 +32,9 @@ export default class BioEditor extends Component {
         })
             .then((result) => result.json())
             .then((data) => {
-                console.log(data);
+                this.setState(data);
+                location.reload();
             });
-
-        this.showEditor();
-        this.props.saveDraftBioToApp(this.state.draftBio);
     }
 
     render() {
@@ -44,19 +44,25 @@ export default class BioEditor extends Component {
                     <>
                         <textarea
                             id="bioText"
-                            name="draftBio"
+                            name="bio"
                             cols="30"
                             rows="10"
                             onChange={this.onFormInputChange}
-                        ></textarea>
-                        <button onClick={this.showEditor}>Cancel</button>
+                        >{this.props.bio}</textarea>
+                        <button
+                            onClick={
+                                (this.showEditor, this.fetchNewBioToServer)
+                            }
+                        >
+                            Save
+                        </button>
                     </>
                 ) : (
                     <>
                         {this.props.bio ? (
                             <>
-                                <h2>{this.props.bio}</h2>
-                                <button>Edit</button>
+                                <h3 className="bioRender">{this.props.bio}</h3>
+                                <button onClick={this.showEditor}>Edit</button>
                             </>
                         ) : (
                             <button onClick={this.showEditor}>Add</button>

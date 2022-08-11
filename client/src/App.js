@@ -1,9 +1,9 @@
 import { Component } from "react";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 // import Logo from "./logo";
 import ProfilePic from "./profilePic";
 import Profile from "./Profile";
-// import Uploader from "./uploader";
-
+import FindPeople from "./findPeople";
 
 export default class App extends Component {
     constructor(props) {
@@ -17,7 +17,6 @@ export default class App extends Component {
         };
         this.togglePopup = this.togglePopup.bind(this);
         this.changeName = this.changeName.bind(this);
-        this.saveDraftBioToApp = this.saveDraftBioToApp.bind(this);
     }
 
     componentDidMount() {
@@ -42,32 +41,46 @@ export default class App extends Component {
         this.setState({ isPopupOpen: !this.state.isPopupOpen });
     }
 
-    saveDraftBioToApp(bio) {
-        console.log(this.state.bio);
-        this.setState({ bio: bio });
-    }
-
     render() {
         return (
             <div id="profileCon">
                 {/* <Logo /> */}
                 <ProfilePic
                     togglePopup={this.togglePopup}
-                    // changeName={this.changeName}
+                    changeName={this.changeName}
                     firstName={this.state.firstName}
                     lastName={this.state.lastName}
                     picture={this.state.picture}
                 />
-                <Profile
-                    togglePopup={this.togglePopup}
-                    picture={this.state.picture}
-                    firstName={this.state.firstName}
-                    lastName={this.state.lastName}
-                    bio={this.state.bio}
-                    saveDraft={this.saveDraftBioToApp}
-                    uploadPicture={this.uploadPicture}
-                    isPopupOpen={this.state.isPopupOpen}
-                />
+                <BrowserRouter>
+                    <Route exact path="/">
+                        <Profile
+                            togglePopup={this.togglePopup}
+                            picture={this.state.picture}
+                            firstName={this.state.firstName}
+                            lastName={this.state.lastName}
+                            bio={this.state.bio}
+                            saveDraft={this.saveDraftBioToApp}
+                            uploadPicture={this.uploadPicture}
+                            isPopupOpen={this.state.isPopupOpen}
+                        />
+                        <div className="profLink">
+                            <Link to="/new-people">
+                                <p>⍆ find new people here ⍅</p>
+                            </Link>
+                        </div>
+                    </Route>
+
+                    <Route path="/new-people">
+                        <FindPeople />
+
+                        <div className="profLink">
+                            <Link to="/">
+                                <p>⍆ your profile ⍅</p>
+                            </Link>
+                        </div>
+                    </Route>
+                </BrowserRouter>
             </div>
         );
     }
