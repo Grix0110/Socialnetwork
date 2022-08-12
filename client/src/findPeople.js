@@ -35,13 +35,15 @@ export default function FindPeople() {
             <ul className="peopleList">
                 {newPeople.map((item, id) => (
                     <li key={id}>
-                        <img
-                            className="listImage"
-                            src={
-                                item.image_url ||
-                                "./png-transparent-social-media-icons-avatar-user-profile-login-black-circle-silhouette-symbol.png"
-                            }
-                        />
+                        <a href={"/user/" + item.id}>
+                            <img
+                                className="listImage"
+                                src={
+                                    item.image_url ||
+                                    "./png-transparent-social-media-icons-avatar-user-profile-login-black-circle-silhouette-symbol.png"
+                                }
+                            />
+                        </a>
                         {item.first_name} {item.last_name}{" "}
                     </li>
                 ))}

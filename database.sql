@@ -20,3 +20,10 @@ ALTER TABLE users ADD bio VARCHAR;
 ALTER TABLE users DROP pword;
 
 ALTER TABLE users ADD pword VARCHAR NOT NULL CHECK (pword <> '');
+
+CREATE TABLE friendships(
+    id SERIAL PRIMARY KEY,
+    sender_id INTEGER REFERENCES users (id),
+    recipent_id INTEGER REFERENCES users (id),
+    accepted BOOLEAN DEFAULT false 
+);

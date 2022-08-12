@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Link } from "react-router-dom";
 import ProfilePic from "./profilePic";
 import Profile from "./Profile";
 import FindPeople from "./findPeople";
+import OtherProfile from "./OtherProfile";
 
 export default class App extends Component {
     constructor(props) {
@@ -45,13 +46,15 @@ export default class App extends Component {
         return (
             <div id="profileCon">
                 {/* <Logo /> */}
-                <ProfilePic
-                    togglePopup={this.togglePopup}
-                    changeName={this.changeName}
-                    firstName={this.state.firstName}
-                    lastName={this.state.lastName}
-                    picture={this.state.picture}
-                />
+                <nav className="navBar">
+                    <ProfilePic
+                        togglePopup={this.togglePopup}
+                        changeName={this.changeName}
+                        firstName={this.state.firstName}
+                        lastName={this.state.lastName}
+                        picture={this.state.picture}
+                    />
+                </nav>
                 <BrowserRouter>
                     <Route exact path="/">
                         <Profile
@@ -70,15 +73,16 @@ export default class App extends Component {
                             </Link>
                         </div>
                     </Route>
-
                     <Route path="/new-people">
                         <FindPeople />
-
                         <div className="profLink">
                             <Link to="/">
                                 <p>⍆ your profile ⍅</p>
                             </Link>
                         </div>
+                    </Route>
+                    <Route path="/user/:id">
+                        <OtherProfile />
                     </Route>
                 </BrowserRouter>
             </div>

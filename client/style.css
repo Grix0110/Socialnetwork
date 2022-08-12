@@ -1,6 +1,12 @@
 body {
     margin: 0;
-    background-color: seashell;
+    /* background-color: rgb(248, 114, 255); */
+    background: linear-gradient(
+        45deg,
+        rgba(255, 0, 89, 1) 0%,
+        rgba(0, 179, 255, 1) 100%
+    );
+    background-size: 400% 400%;
     display: grid;
     place-items: center;
     text-align: center;
@@ -16,9 +22,10 @@ form {
 }
 
 input {
+    background-color: rgba(255, 255, 255, 0.5);
     border: none;
     margin: 1em;
-    height: 1em;
+    height: 2em;
     width: 10em;
     border-radius: 7px;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
@@ -40,9 +47,10 @@ input:focus {
 }
 
 input::file-selector-button {
+    height: 2em;
     border: none;
     text-shadow: rgba(255, 0, 136, 0.7) 0 1px, rgba(0, 200, 255, 0.7) 0 -1px;
-    border-radius: 14px;
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 input::file-selector-button:hover {
@@ -60,9 +68,11 @@ a:visited {
 }
 
 button {
+    background-color: rgba(255, 255, 255, 0.5);
     border: none;
     margin: 1em;
     width: 10em;
+    height: 2em;
     border-radius: 7px;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     text-shadow: rgba(255, 0, 136, 0.7) 0 1px, rgba(0, 200, 255, 0.7) 0 -1px;
@@ -82,14 +92,16 @@ button:active {
     display: grid;
     margin: 1em;
     grid-template-columns: 0.1fr 1fr 0.1fr;
-    grid-template-rows: 0.1fr 1fr;
+    grid-template-rows: 80px 1fr;
     place-items: center;
     width: 97vw;
+    gap: 1em;
 }
 
-#bio {
-    grid-column-start: 1;
+.bio {
+    grid-column-start: 2;
     margin: 1em;
+    justify-self: start;
 }
 
 #bioText {
@@ -112,14 +124,27 @@ button:active {
 }
 
 #usernameBig {
-    grid-column-start: 1;
+    grid-column-start: 2;
+}
+
+#profileComponent {
+    display: grid;
+    min-width: 30em;
+    width: 40vw;
+    grid-template-columns: 0.1fr 1fr;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 1em;
+    box-shadow: 3px 3px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 #profileComponent > .profilePic {
+    margin: 2em;
     border-radius: 50%;
     height: 13em;
     width: 13em;
     grid-column-start: 1;
+    grid-row-start: 1;
+    justify-self: start;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
@@ -133,11 +158,26 @@ button:active {
         0px -3px 0px rgba(0, 0, 0, 0.7);
 }
 
+.navBar {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    display: grid;
+    place-items: center;
+    height: 5em;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 1em;
+    box-shadow: 3px 3px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
 .profilePic {
+    object-fit: cover;
     border-radius: 50%;
     height: 4em;
     width: 4em;
-    grid-column-start: 3;
+    justify-self: end;
+    margin-right: 1em;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
@@ -159,19 +199,23 @@ button:active {
     margin-right: 1em;
     grid-column-start: 2;
     grid-row-start: 1;
-    justify-self: end;
+    /* justify-self: end; */
 }
 
-.peopleList{
+.peopleList {
     list-style: none;
 }
 
-li{
+li {
     margin: 1em;
 }
 
 .findContainer {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 1em;
+    box-shadow: 3px 3px 2px 1px rgba(0, 0, 0, 0.2);
     display: grid;
+    position: relative;
     width: 30em;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 100px 1fr;

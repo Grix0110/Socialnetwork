@@ -212,6 +212,56 @@ app.get("/getPeople/:name", (req, res) => {
         .catch((err) => console.log("ERROR in find people: ", err));
 });
 
+app.get("/otheruser/:id", (req, res) => {
+    let id = req.params.id;
+    db.getUser(id)
+        .then((result) => {
+            res.json(result.rows[0]);
+        })
+        .catch((err) => console.log("ERROR in get User: ", err));
+});
+
+app.get("/friendship/:id", (req, res) => {
+    let sender = req.session.userId;
+    // let recipent = req.params.id;
+    db.findFriendship(sender, req.params.id)
+        .then((result) => {
+            console.log(result.rows);
+            res.json(result.rows);
+        })
+        .catch((err) => console.log("ERROR in find friendship: ", err));
+});
+
+app.post("/requestfriend", (req, res) => {
+    let sender = req.session.userId;
+    // let recipent = req.params.id;
+    db.requestFriendship(sender, req.params.id)
+        .then((result) => {
+            res.json(result.rows);
+        })
+        .catch((err) => console.log("ERROR in request friendship: ", err));
+});
+
+app.post("/acceptfriend", (req, res) => {
+    let sender = req.session.userId;
+    let recipent = req.params.id;
+    db.acceptFriendship(sender, recipent)
+        .then((result) => {
+            res.json(result.rows);
+        })
+        .catch((err) => console.log("ERROR in accept friendship: ", err));
+});
+
+app.post("/unfriend", (req, res) => {
+    let sender = req.session.userId;
+    let recipent = req.params.id;
+    db.unfriend(sender, recipent)
+        .then((result) => {
+            res.json(result.rows);
+        })
+        .catch((err) => console.log("ERROR in unfriend: ", err));
+});
+
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "..", "client", "index.html"));
 });

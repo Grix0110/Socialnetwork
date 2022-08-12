@@ -39,7 +39,7 @@ export default class BioEditor extends Component {
 
     render() {
         return (
-            <section id="bio">
+            <section className="bio">
                 {this.state.isEditorVisible ? (
                     <>
                         <textarea
