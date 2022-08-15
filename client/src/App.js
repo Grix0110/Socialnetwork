@@ -5,6 +5,7 @@ import ProfilePic from "./profilePic";
 import Profile from "./Profile";
 import FindPeople from "./findPeople";
 import OtherProfile from "./OtherProfile";
+import FriendsAndWannabes from "./friendsAndWannabes";
 
 export default class App extends Component {
     constructor(props) {
@@ -69,7 +70,12 @@ export default class App extends Component {
                         />
                         <div className="profLink">
                             <Link to="/new-people">
-                                <p>⍆ find new people here ⍅</p>
+                                <p>⍆ find new friends ⍅</p>
+                            </Link>
+                        </div>
+                        <div>
+                            <Link to="/friends">
+                                <p>⍆ friends ⍅</p>
                             </Link>
                         </div>
                     </Route>
@@ -83,6 +89,14 @@ export default class App extends Component {
                     </Route>
                     <Route path="/user/:id">
                         <OtherProfile />
+                        <div className="profLink">
+                            <Link to="/new-people">
+                                <p>⍆ find new people here ⍅</p>
+                            </Link>
+                        </div>
+                    </Route>
+                    <Route path="/friends">
+                        <FriendsAndWannabes/>
                     </Route>
                 </BrowserRouter>
             </div>

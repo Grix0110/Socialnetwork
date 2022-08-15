@@ -3,31 +3,50 @@ import { useParams } from "react-router";
 
 export default function FriendButton() {
     const { id } = useParams();
-    // const [button, setButton] = useState({
-    //     text: "",
-    //     url: "",
-    // });
+    const [button, setButton] = useState({
+        text: "send",
+        url: "/otherpeople",
+    });
+
+    const buttonState = (data) => {
+        let button = {};
+
+        if (data[0] == undefined) {
+            button.text = "Send request";
+            button.url = "/requestfriend";
+        } else if (!data[0].accepted) {
+            button.text = "Accept request";
+            button.url = "/acceptfriend";
+        } else if (data[0].accepted) {
+            button.text = "Unfriend";
+            button.url = "/unfriend";
+        }
+        console.log("BUTTON: ", button);
+        return button;
+    };
 
     useEffect(() => {
         fetch(`/friendship/${id}`)
             .then((result) => result.json())
             .then((data) => {
-                console.log("friendship from database: ", data);
+                let changeButton = buttonState(data);
+                setButton(changeButton);
             })
             .catch((err) => {
                 console.log("ERROR in fetch request FriendButton", err);
             });
     }, []);
 
-    const changeButtonOnClick = () => {
-        fetch(`/requestfriend`, {
+    const changeButtonOnClick = (url) => {
+        fetch(url, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id }),
         })
-            .then((resp) => resp.json())
+            .then((result) => result.json())
             .then((data) => {
-                console.log("Friendshiprequest: ", data);
+                let changeButton = buttonState(data);
+                setButton(changeButton);
             })
             .catch((err) => {
                 console.log("error in changing friendship status", err);
@@ -36,7 +55,9 @@ export default function FriendButton() {
 
     return (
         <>
-            <button onClick={changeButtonOnClick}>send</button>
+            <button onClick={() => changeButtonOnClick(button.url)}>
+                {button.text}
+            </button>
         </>
     );
 }

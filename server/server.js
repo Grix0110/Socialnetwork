@@ -223,10 +223,9 @@ app.get("/otheruser/:id", (req, res) => {
 
 app.get("/friendship/:id", (req, res) => {
     let sender = req.session.userId;
-    // let recipent = req.params.id;
-    db.findFriendship(sender, req.params.id)
+    let recipent = req.params.id;
+    db.findFriendship(sender, recipent)
         .then((result) => {
-            console.log(result.rows);
             res.json(result.rows);
         })
         .catch((err) => console.log("ERROR in find friendship: ", err));
@@ -234,8 +233,9 @@ app.get("/friendship/:id", (req, res) => {
 
 app.post("/requestfriend", (req, res) => {
     let sender = req.session.userId;
-    // let recipent = req.params.id;
-    db.requestFriendship(sender, req.params.id)
+    let recipent = req.body.id;
+
+    db.requestFriendship(sender, recipent)
         .then((result) => {
             res.json(result.rows);
         })
@@ -244,9 +244,11 @@ app.post("/requestfriend", (req, res) => {
 
 app.post("/acceptfriend", (req, res) => {
     let sender = req.session.userId;
-    let recipent = req.params.id;
+    let recipent = req.body.id;
+
     db.acceptFriendship(sender, recipent)
         .then((result) => {
+            console.log("ACCEPTFRIEND: ", result.rows);
             res.json(result.rows);
         })
         .catch((err) => console.log("ERROR in accept friendship: ", err));
@@ -254,12 +256,23 @@ app.post("/acceptfriend", (req, res) => {
 
 app.post("/unfriend", (req, res) => {
     let sender = req.session.userId;
-    let recipent = req.params.id;
+    let recipent = req.body.id;
+
     db.unfriend(sender, recipent)
         .then((result) => {
             res.json(result.rows);
         })
         .catch((err) => console.log("ERROR in unfriend: ", err));
+});
+
+app.get("/friends", (req, res) => {
+    let id = req.session.id;
+    db.getAllFriendStatus(id)
+        .then((result) => {
+            console.log("RESULT in SERVER: ", result);
+            res.json();
+        })
+        .catch((err) => console.log("ERROR in get all friends status: ", err));
 });
 
 app.get("*", function (req, res) {

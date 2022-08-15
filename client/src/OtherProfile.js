@@ -2,21 +2,6 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import FriendButton from "./FriendButton";
 
-// const buttonState = (data) => {
-//     let button = {};
-//     if (data.length == 0) {
-//         button.text = "Send request";
-//         button.url = "/requestfriend";
-//     } else if (!data[0].accepted && data[0].sender_id == id) {
-//         button.text = "Accept request";
-//         button.url = "/acceptfriend";
-//     } else if (data[0].accepted) {
-//         button.text = "Unfriend";
-//         button.url = "/unfriend";
-//     }
-//     return button;
-// };
-
 export default function OtherProfile() {
     const { id } = useParams();
     const [otherProfile, setOtherProfile] = useState([]);
