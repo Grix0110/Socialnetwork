@@ -237,6 +237,8 @@ app.post("/requestfriend", (req, res) => {
 
     db.requestFriendship(sender, recipent)
         .then((result) => {
+            result.rows[0].isMyRequest =
+                result.rows[0].sender_id == req.session.userId;
             res.json(result.rows);
         })
         .catch((err) => console.log("ERROR in request friendship: ", err));
@@ -248,7 +250,7 @@ app.post("/acceptfriend", (req, res) => {
 
     db.acceptFriendship(sender, recipent)
         .then((result) => {
-            console.log("ACCEPTFRIEND: ", result.rows);
+            // console.log("RESULT OF SERVER: ", result);
             res.json(result.rows);
         })
         .catch((err) => console.log("ERROR in accept friendship: ", err));
@@ -265,12 +267,11 @@ app.post("/unfriend", (req, res) => {
         .catch((err) => console.log("ERROR in unfriend: ", err));
 });
 
-app.get("/friends", (req, res) => {
-    let id = req.session.id;
+app.get("/friends.json", (req, res) => {
+    let id = req.session.userId;
     db.getAllFriendStatus(id)
         .then((result) => {
-            console.log("RESULT in SERVER: ", result);
-            res.json();
+            res.json(result.rows);
         })
         .catch((err) => console.log("ERROR in get all friends status: ", err));
 });

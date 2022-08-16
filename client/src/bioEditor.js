@@ -45,11 +45,10 @@ export default class BioEditor extends Component {
                         <textarea
                             id="bioText"
                             name="bio"
-                            cols="30"
-                            rows="10"
+                            
                             onChange={this.onFormInputChange}
                         >{this.props.bio}</textarea>
-                        <button
+                        <button className="buttonBio"
                             onClick={
                                 (this.showEditor, this.fetchNewBioToServer)
                             }

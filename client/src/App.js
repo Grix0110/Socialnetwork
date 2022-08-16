@@ -47,16 +47,29 @@ export default class App extends Component {
         return (
             <div id="profileCon">
                 {/* <Logo /> */}
-                <nav className="navBar">
-                    <ProfilePic
-                        togglePopup={this.togglePopup}
-                        changeName={this.changeName}
-                        firstName={this.state.firstName}
-                        lastName={this.state.lastName}
-                        picture={this.state.picture}
-                    />
-                </nav>
                 <BrowserRouter>
+                    <nav className="navBar">
+                        <p className="logo">G L A S S D O O R</p>
+                        <a href="/" className="profilePic">
+                            <ProfilePic
+                                // togglePopup={this.togglePopup}
+                                changeName={this.changeName}
+                                firstName={this.state.firstName}
+                                lastName={this.state.lastName}
+                                picture={this.state.picture}
+                            />
+                        </a>
+                        <div className="newFriendsLink">
+                            <Link to="/new-people">
+                                <p className="linkText">search</p>
+                            </Link>
+                        </div>
+                        <div className="friendsLink">
+                            <Link to="/friends">
+                                <p className="linkText">friends</p>
+                            </Link>
+                        </div>
+                    </nav>
                     <Route exact path="/">
                         <Profile
                             togglePopup={this.togglePopup}
@@ -68,35 +81,15 @@ export default class App extends Component {
                             uploadPicture={this.uploadPicture}
                             isPopupOpen={this.state.isPopupOpen}
                         />
-                        <div className="profLink">
-                            <Link to="/new-people">
-                                <p>⍆ find new friends ⍅</p>
-                            </Link>
-                        </div>
-                        <div>
-                            <Link to="/friends">
-                                <p>⍆ friends ⍅</p>
-                            </Link>
-                        </div>
                     </Route>
                     <Route path="/new-people">
                         <FindPeople />
-                        <div className="profLink">
-                            <Link to="/">
-                                <p>⍆ your profile ⍅</p>
-                            </Link>
-                        </div>
                     </Route>
                     <Route path="/user/:id">
                         <OtherProfile />
-                        <div className="profLink">
-                            <Link to="/new-people">
-                                <p>⍆ find new people here ⍅</p>
-                            </Link>
-                        </div>
                     </Route>
                     <Route path="/friends">
-                        <FriendsAndWannabes/>
+                        <FriendsAndWannabes />
                     </Route>
                 </BrowserRouter>
             </div>

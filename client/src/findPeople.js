@@ -36,7 +36,7 @@ export default function FindPeople() {
                 {newPeople.map((item, id) => (
                     <li key={id}>
                         <a href={"/user/" + item.id}>
-                            <img
+                            <img 
                                 className="listImage"
                                 src={
                                     item.image_url ||

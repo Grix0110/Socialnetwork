@@ -3,14 +3,34 @@
 // 2. accept one friend
 // 3. unfriend one friend
 
-export default function friendsAndWannabes(friends = [], action) {
-    if (action.type === "friends-and-wannabes/received") {
-        return action.payload.friends;
-    } else if (action.type === "friends-and-wannabes/accept") {
-        const newFriends =
-            friends.map(/** do something with action.payload.id... */);
-        return newFriends;
+export default function friendsAndWannabesReducer(friends = [], action) {
+    if (action.type === "friendsAndWannabes/received") {
+        // console.log("FRIENDS FROM SLICE: ", action.payload.friends);
+        friends = action.payload.friends;
     }
+
+    if (action.type === "friendsAndWannabes/accept") {
+        friends = friends.map((friend) => {
+            // console.log("LOG FROM SLICE: ", friend);
+            if (friend.id == action.payload.id) {
+                return { ...friend, accepted: true };
+            } else {
+                return friend;
+            }
+        });
+        // return newFriends;
+    }
+
+    if (action.type === "friendsAndWannabes/unfriend") {
+        console.log("ACTION PAYLOAD: ", action.payload);
+        friends = friends.filter((friend) => {
+            // console.log("LOG FROM SLICE: ", friend);
+            if (friend.id != action.payload.id) {
+                return { ...friend };
+            }
+        });
+    }
+
     return friends;
 }
 
@@ -23,11 +43,21 @@ export default function friendsAndWannabes(friends = [], action) {
 
 export function acceptFriend(id) {
     return {
-        type: "/friends-and-wannabes/accept",
+        type: "friendsAndWannabes/accept",
         payload: { id },
     };
 }
 
-export function receiveFriendsAndWannabes() {
-    // ...
+export function receiveFriendsAndWannabes(friends) {
+    return {
+        type: "friendsAndWannabes/received",
+        payload: { friends },
+    };
+}
+
+export function unfriendFriend(id) {
+    return {
+        type: "friendsAndWannabes/unfriend",
+        payload: { id },
+    };
 }

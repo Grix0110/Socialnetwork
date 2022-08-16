@@ -27,3 +27,9 @@ CREATE TABLE friendships(
     recipent_id INTEGER REFERENCES users (id),
     accepted BOOLEAN DEFAULT false 
 );
+
+SELECT users.id, first_name, last_name, accepted, image_url FROM users 
+        JOIN friendships
+        ON (accepted = true AND recipent_id = 235 AND users.id = friendships.sender_id)
+        OR (accepted = true AND sender_id = 235 AND users.id = friendships.recipent_id)
+        OR (accepted = false AND recipent_id = 235 AND users.id = friendships.sender_id);

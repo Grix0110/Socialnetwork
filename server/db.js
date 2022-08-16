@@ -111,7 +111,8 @@ module.exports.requestFriendship = (user1, user2) => {
 
 module.exports.acceptFriendship = (user1, user2) => {
     return db.query(
-        `UPDATE friendships SET accepted=true WHERE sender_id=$1 AND recipent_id=$2 RETURNING *`,
+        `UPDATE friendships SET accepted=true WHERE (sender_id = $1 AND recipent_id = $2)
+        OR (sender_id = $2 AND recipent_id = $1) RETURNING *`,
         [user1, user2]
     );
 };
@@ -128,11 +129,11 @@ module.exports.unfriend = (user1, user2) => {
 
 module.exports.getAllFriendStatus = (id) => {
     return db.query(
-        `SELECT users.id, first_name, last_name, accepted, profile_image_url FROM users 
+        `SELECT users.id, first_name, last_name, accepted, image_url FROM users 
         JOIN friendships
         ON (accepted = true AND recipent_id = $1 AND users.id = friendships.sender_id)
         OR (accepted = true AND sender_id = $1 AND users.id = friendships.recipent_id)
-        OR (accpted = false AND recipent_id = $1 AND users_id = friendships.sender_id)`,
+        OR (accepted = false AND recipent_id = $1 AND users.id = friendships.sender_id)`,
         [id]
     );
 };

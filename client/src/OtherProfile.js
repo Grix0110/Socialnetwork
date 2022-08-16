@@ -20,12 +20,6 @@ export default function OtherProfile() {
     return (
         <>
             <div id="profileComponent">
-                <div className="bio">
-                    <h1 id="usernameBig">
-                        {otherProfile.first_name} {otherProfile.last_name}
-                    </h1>
-                    <h3 className="bioRender">{otherProfile.bio}</h3>
-                </div>
                 <img
                     className="profilePic"
                     src={
@@ -34,7 +28,15 @@ export default function OtherProfile() {
                     }
                     alt="profilePic"
                 ></img>
-                <FriendButton />
+                <h1 id="usernameBig">
+                    {otherProfile.first_name} {otherProfile.last_name}
+                </h1>
+            </div>
+            <div className="messageCon">
+                <div className="bio">
+                    <h3 className="bioRender">{otherProfile.bio}</h3>
+                    <FriendButton />
+                </div>
             </div>
         </>
     );

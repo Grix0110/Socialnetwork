@@ -13,17 +13,30 @@ export default function Profile({
     togglePopup,
 }) {
     return (
-        <div id="profileComponent">
-            <div className="bio">
+        <>
+            <div id="profileComponent">
                 <h1 id="usernameBig">
                     {firstName} {lastName}
                 </h1>
+                {/* <BioEditor saveDraft={saveDraft} bio={bio} /> */}
+
+                {/* <h1 id="usernameBig">
+                    {firstName} {lastName}
+                </h1> */}
+                <ProfilePic togglePopup={togglePopup} picture={picture} />
+                {isPopupOpen && (
+                    <Uploader
+                        firstName={firstName}
+                        uploadPicture={uploadPicture}
+                    />
+                )}
+            </div>
+
+            <div className="messageCon">
                 <BioEditor saveDraft={saveDraft} bio={bio} />
             </div>
-            <ProfilePic togglePopup={togglePopup} picture={picture} />
-            {isPopupOpen && (
-                <Uploader firstName={firstName} uploadPicture={uploadPicture} />
-            )}
-        </div>
+
+            <div className="chatCon"></div>
+        </>
     );
 }

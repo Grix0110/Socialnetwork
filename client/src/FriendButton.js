@@ -10,13 +10,16 @@ export default function FriendButton() {
 
     const buttonState = (data) => {
         let button = {};
-
+        console.log("DATA BUTTON: ", data[0]);
         if (data[0] == undefined) {
             button.text = "Send request";
             button.url = "/requestfriend";
-        } else if (!data[0].accepted) {
+        } else if (!data[0].accepted && data[0].isMyRequest) {
             button.text = "Accept request";
             button.url = "/acceptfriend";
+        } else if (!data[0].accepted && !data[0].isMyRequest) {
+            button.text = "Revoke request";
+            button.url = "/unfriend";
         } else if (data[0].accepted) {
             button.text = "Unfriend";
             button.url = "/unfriend";
