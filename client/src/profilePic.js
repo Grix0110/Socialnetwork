@@ -12,7 +12,7 @@ export default function ProfilePic({
             onClick={togglePopup}
             src={
                 picture ||
-                "./png-transparent-social-media-icons-avatar-user-profile-login-black-circle-silhouette-symbol.png"
+                "../png-transparent-social-media-icons-avatar-user-profile-login-black-circle-silhouette-symbol.png"
             }
             alt="profilePic"
         ></img>

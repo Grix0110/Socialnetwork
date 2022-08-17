@@ -18,11 +18,6 @@ export default function Profile({
                 <h1 id="usernameBig">
                     {firstName} {lastName}
                 </h1>
-                {/* <BioEditor saveDraft={saveDraft} bio={bio} /> */}
-
-                {/* <h1 id="usernameBig">
-                    {firstName} {lastName}
-                </h1> */}
                 <ProfilePic togglePopup={togglePopup} picture={picture} />
                 {isPopupOpen && (
                     <Uploader
@@ -31,11 +26,9 @@ export default function Profile({
                     />
                 )}
             </div>
-
             <div className="messageCon">
                 <BioEditor saveDraft={saveDraft} bio={bio} />
             </div>
-
             <div className="chatCon"></div>
         </>
     );

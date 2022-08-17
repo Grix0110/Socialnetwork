@@ -1,20 +1,10 @@
 body {
     margin: 0;
-    /* background-color: rgb(248, 114, 255); */
-    background-image: linear-gradient(
-        to right top,
-        #d16ba5,
-        #c777b9,
-        #ba83ca,
-        #aa8fd8,
-        #9a9ae1,
-        #8aa7ec,
-        #79b3f4,
-        #69bff8,
-        #52cffe,
-        #41dfff,
-        #46eefa,
-        #5ffbf1
+    background: linear-gradient(
+        90deg,
+        rgba(2, 0, 36, 1) 0%,
+        rgb(0, 0, 163) 10%,
+        rgb(83, 226, 255) 50%
     );
     background-size: 400% 400%;
     display: grid;
@@ -31,36 +21,74 @@ form {
     cursor: pointer;
 }
 
-h2{
+h2 {
+    color: rgba(255, 255, 255, 0.1);
+    text-shadow: 1px 1px 1px rgba(145, 145, 145, 0.1),
+        1px 2px 1px rgba(0, 0, 0, 0.1), 1px 9px 3px rgba(16, 16, 16, 0.1),
+        1px 22px 10px rgba(16, 16, 16, 0.1), 1px 18px 36px rgba(16, 16, 16, 0.1),
+        1px 36px 72px rgba(16, 16, 16, 0.1);
     margin-left: 1em;
+}
+
+.friendText {
+    color: rgba(255, 255, 255, 0.1);
+    text-shadow: 1px 1px 1px rgba(145, 145, 145, 0.1),
+        1px 2px 1px rgba(0, 0, 0, 0.1), 1px 9px 3px rgba(16, 16, 16, 0.1),
+        1px 22px 10px rgba(16, 16, 16, 0.1), 1px 18px 36px rgba(16, 16, 16, 0.1),
+        1px 36px 72px rgba(16, 16, 16, 0.1);
+    margin-left: 1em;
+}
+
+.friendName {
+    color: rgba(255, 255, 255, 0.1);
+    text-shadow: 1px 1px 1px rgba(145, 145, 145, 0.1),
+        1px 2px 1px rgba(0, 0, 0, 0.1), 1px 9px 3px rgba(16, 16, 16, 0.1),
+        1px 22px 10px rgba(16, 16, 16, 0.1), 1px 18px 36px rgba(16, 16, 16, 0.1),
+        1px 36px 72px rgba(16, 16, 16, 0.1);
+}
+
+/* .friendName:hover {
+    cursor: default;
+    color: rgba(255, 255, 255, 0.5);
+} */
+
+.friendText:hover {
+    cursor: default;
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .logo {
     grid-column-start: 1;
-    grid-column-end: 4;
+    grid-column-end: 3;
     justify-self: start;
     margin-left: 1em;
-    margin-bottom: 1em;
+    /* margin-bottom: 1em; */
     font-family: verdana;
     font-size: 1.5em;
-    /* font-weight: 700; */
     color: rgba(255, 255, 255, 0.1);
     text-shadow: 1px 1px 1px rgba(145, 145, 145, 0.1),
-        1px 2px 1px rgba(0, 0, 0, 0.01),
-        1px 9px 3px rgba(16, 16, 16, 0.01), 1px 22px 10px rgba(16, 16, 16, 0.05),
-        1px 18px 36px rgba(16, 16, 16, 0.05),
-        1px 36px 72px rgba(16, 16, 16, 0.01);
+        1px 2px 1px rgba(0, 0, 0, 0.1), 1px 9px 3px rgba(16, 16, 16, 0.1),
+        1px 22px 10px rgba(16, 16, 16, 0.1), 1px 18px 36px rgba(16, 16, 16, 0.1),
+        1px 36px 72px rgba(16, 16, 16, 0.1);
+}
+
+.logo:hover {
+    cursor: default;
+    color: rgba(255, 255, 255, 0.5);
 }
 
 input {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.1);
     border: none;
     margin: 1em;
     height: 2em;
     width: 10em;
     border-radius: 7px;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.005);
-    text-shadow: rgba(255, 0, 136, 0.7) 0 1px, rgba(0, 200, 255, 0.7) 0 -1px;
+    text-shadow: 1px 1px 1px rgba(145, 145, 145, 0.1),
+        1px 2px 1px rgba(0, 0, 0, 0.1), 1px 9px 3px rgba(16, 16, 16, 0.1),
+        1px 22px 10px rgba(16, 16, 16, 0.1), 1px 18px 36px rgba(16, 16, 16, 0.1),
+        1px 36px 72px rgba(16, 16, 16, 0.1);
 }
 
 input:hover {
@@ -68,10 +96,16 @@ input:hover {
 }
 
 input::placeholder {
+    color: rgba(255, 255, 255, 0.1);
     text-align: center;
 }
 
+input:hover::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
 input:focus {
+    color: rgba(255, 255, 255, 0.5);
     outline: none;
     box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.3),
         0px -1px 0px rgba(0, 0, 0, 0.2);
@@ -89,19 +123,25 @@ input::file-selector-button:hover {
 }
 
 a {
-    color: black;
+    color: rgba(255, 255, 255, 0.1);
     text-decoration: none;
     /* text-shadow: rgba(255, 0, 136, 0.7) 0 1px, rgba(0, 200, 255, 0.7) 0 -1px; */
     /* color: rgba(255, 255, 255, 0.5); */
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2),
-        1px 18px 6px rgba(16, 16, 16, 0.01), 1px 22px 10px rgba(16, 16, 16, 0.05),
+        1px 18px 6px rgba(16, 16, 16, 0.01),
+        1px 22px 10px rgba(16, 16, 16, 0.05),
         1px 25px 35px rgba(16, 16, 16, 0.05),
         1px 30px 60px rgba(16, 16, 16, 0.01);
 }
 
+a:hover {
+    color: rgba(255, 255, 255, 0.5);
+}
+
 a:visited {
-    color: black;
-    text-shadow: rgba(255, 0, 136, 0.7) 0 -1px, rgba(0, 200, 255, 0.7) 0 1px;
+    /* color: black; */
+    color: rgba(255, 255, 255, 0.1);
+    /* text-shadow: rgba(255, 0, 136, 0.7) 0 -1px, rgba(0, 200, 255, 0.7) 0 1px; */
 }
 
 button {
@@ -110,12 +150,19 @@ button {
     margin: 1em;
     width: 10em;
     height: 2em;
+    color: rgba(255, 255, 255, 0.1);
     border-radius: 7px;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.005);
-    text-shadow: rgba(255, 0, 136, 0.7) 0 1px, rgba(0, 200, 255, 0.7) 0 -1px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2),
+        1px 18px 6px rgba(16, 16, 16, 0.01),
+        1px 22px 10px rgba(16, 16, 16, 0.05),
+        1px 25px 35px rgba(16, 16, 16, 0.05),
+        1px 30px 60px rgba(16, 16, 16, 0.01);
+    /* text-shadow: rgba(255, 0, 136, 0.7) 0 1px, rgba(0, 200, 255, 0.7) 0 -1px; */
 }
 
 button:hover {
+    color: rgba(255, 255, 255, 0.5);
     box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }
@@ -129,7 +176,7 @@ button:active {
     display: grid;
     margin: 1em;
     grid-template-columns: 0.1fr 0.1fr 1fr 0.1fr;
-    grid-template-rows: 80px 1fr 0.96fr;
+    grid-template-rows: 80px 1fr 0.85fr;
     place-items: center;
     width: 97vw;
     height: 100%;
@@ -153,9 +200,11 @@ button:active {
     border: none;
     border-radius: 1em;
     margin: 1em;
-    width: 30em;
-    height: 10em;
-    text-shadow: rgba(255, 0, 136, 0.7) 0 1px, rgba(0, 200, 255, 0.7) 0 -1px;
+    width: 20em;
+    height: 6em;
+    font-size: 1.5em;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.5);
     box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.2),
         0px -2px 0px rgba(0, 0, 0, 0.2);
     grid-row-start: 1;
@@ -168,17 +217,29 @@ button:active {
 .bioRender {
     grid-column-start: 1;
     grid-row-start: 1;
+    margin-left: 1em;
+    color: rgba(255, 255, 255, 0.5);
+    text-shadow: 1px 1px 1px rgba(145, 145, 145, 0.1),
+        1px 2px 1px rgba(0, 0, 0, 0.1), 1px 9px 3px rgba(16, 16, 16, 0.1),
+        1px 22px 10px rgba(16, 16, 16, 0.1), 1px 18px 36px rgba(16, 16, 16, 0.1),
+        1px 36px 72px rgba(16, 16, 16, 0.1);
 }
 
 #usernameBig {
     align-self: start;
     grid-column-start: 2;
-    /* margin-right: 1em; */
-    /* color: rgba(255, 255, 255, 0.3); */
+
+    color: rgba(255, 255, 255, 0.1);
     text-shadow: 1px 1px 1px rgba(145, 145, 145, 0.1),
-        1px 18px 6px rgba(16, 16, 16, 0.01), 1px 22px 10px rgba(16, 16, 16, 0.05),
+        1px 18px 6px rgba(16, 16, 16, 0.01),
+        1px 22px 10px rgba(16, 16, 16, 0.05),
         1px 25px 35px rgba(16, 16, 16, 0.05),
         1px 30px 60px rgba(16, 16, 16, 0.01);
+}
+
+#usernameBig:hover {
+    cursor: default;
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .messageCon {
@@ -227,7 +288,7 @@ button:active {
 
 #profileComponent > .profilePic {
     margin: 2em;
-    border-radius: 50%;
+    border-radius: 1em;
     height: 13em;
     width: 13em;
     grid-column-start: 1;
@@ -252,10 +313,11 @@ button:active {
     grid-row-start: 1;
     display: grid;
     gap: 1em;
+    padding-right: 1em;
     grid-template-columns: repeat(5, 1fr);
     place-items: center;
     height: 5em;
-    width: 100%;
+    width: 95%;
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 1em;
     box-shadow: 3px 3px 2px 1px rgba(0, 0, 0, 0.005);
@@ -268,11 +330,10 @@ button:active {
 .profilePic {
     grid-column-start: 6;
     object-fit: cover;
-    border-radius: 50%;
+    border-radius: 1em;
     height: 4em;
     width: 4em;
     justify-self: end;
-    margin-right: 1em;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.005);
 }
 
@@ -301,6 +362,11 @@ button:active {
 }
 
 .linkText {
+    /* grid-column-start: 5;
+    grid-row-start: 1; */
+    border-radius: 1em;
+    width: 100%;
+    height: 90%;
     font-size: 1em;
     padding: auto;
 }
@@ -324,7 +390,28 @@ button:active {
     border-radius: 1em;
 }
 
+.chatLink {
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 3px 3px 2px 1px rgba(0, 0, 0, 0.005);
+    grid-column-start: 3;
+    grid-row-start: 1;
+    width: 100%;
+    height: 80%;
+    border-radius: 1em;
+}
+
+.chatLink:hover {
+    color: rgba(0, 0, 0, 0.5);
+    box-shadow: 3px 3px 2px 1px rgba(0, 0, 0, 0.1);
+}
+
+.chatLink:active {
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.3),
+        0px -3px 0px rgba(0, 0, 0, 0.7);
+}
+
 .friendsLink:hover {
+    color: rgba(0, 0, 0, 0.5);
     box-shadow: 3px 3px 2px 1px rgba(0, 0, 0, 0.1);
 }
 
@@ -354,10 +441,10 @@ li {
 }
 
 .listImage {
-    width: 10em;
-    height: 10em;
+    width: 9em;
+    height: 9em;
     object-fit: cover;
-    border-radius: 50%;
+    border-radius: 1em;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.005);
 }
 

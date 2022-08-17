@@ -14,7 +14,7 @@ export default function FriendButton() {
         if (data[0] == undefined) {
             button.text = "Send request";
             button.url = "/requestfriend";
-        } else if (!data[0].accepted && data[0].isMyRequest) {
+        } else if (data[0].isMyRequest && !data[0].accepted) {
             button.text = "Accept request";
             button.url = "/acceptfriend";
         } else if (!data[0].accepted && !data[0].isMyRequest) {

@@ -5,6 +5,7 @@ import {
     receiveFriendsAndWannabes,
     unfriendFriend,
 } from "./redux/slice";
+import { Link } from "react-router-dom";
 
 export default function FriendsAndWannabes() {
     const dispatch = useDispatch();
@@ -68,19 +69,19 @@ export default function FriendsAndWannabes() {
 
     return (
         <section className="friendsAndWannabes">
-            <h2>Wannabes</h2>
+            <h2 className="friendText">Wannabes</h2>
             <div className="friendsCon">
                 {wannabes &&
                     wannabes.map((wannabe) => {
                         return (
                             <div key={wannabe.id}>
-                                <a href={"/user/" + wannabe.id}>
+                                <Link to={`/user/${wannabe.id}`}>
                                     <img
                                         className="profilePic"
                                         src={wannabe.image_url}
                                     ></img>{" "}
-                                </a>
-                                <p>
+                                </Link>
+                                <p className="friendName">
                                     {wannabe.first_name} {wannabe.last_name}
                                 </p>
                                 <button
@@ -94,19 +95,20 @@ export default function FriendsAndWannabes() {
                         );
                     })}
             </div>
-            <h2>Friends</h2>
+            <h2 className="friendText">Friends</h2>
             <div className="friendsCon">
                 {friends &&
                     friends.map((friend) => {
                         return (
                             <div key={friend.id}>
-                                <a href={"/user/" + friend.id}>
+                                <Link to={`/user/${friend.id}`}>
                                     <img
                                         className="profilePic"
                                         src={friend.image_url}
                                     ></img>
-                                </a>
-                                <p>
+                                </Link>
+
+                                <p className="friendName">
                                     {friend.first_name} {friend.last_name}
                                 </p>
                                 <button

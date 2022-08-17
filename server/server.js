@@ -11,16 +11,27 @@ const cookieSession = require("cookie-session");
 const COOKIE_SECRET =
     process.env.COOKIE_SECRET || require("../secrets.json").COOKIE_SECRET;
 const bcrypt = require("bcryptjs/dist/bcrypt");
+const cookieSessionMiddleware = cookieSession({
+    secret: COOKIE_SECRET,
+    maxAge: 1000 * 60 * 60 * 24 * 24,
+});
+const server = require("http").Server(app);
+const io = require("socket.io")(server, {
+    allowRequest: (req, callback) =>
+        callback(null, req.headers.referer.startsWith("http://localhost:3000")),
+});
 
+//--------------------------------------------------------------------------------
+
+app.use(express.json());
 app.use(compression());
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
-app.use(
-    cookieSession({
-        secret: COOKIE_SECRET,
-        maxAge: 1000 * 60 * 60 * 24 * 24,
-    })
-);
-app.use(express.json());
+app.use(cookieSessionMiddleware);
+io.use(function (socket, next) {
+    cookieSessionMiddleware(socket.request, socket.request.res, next);
+});
+
+//---------------------------------------------------------------------------------
 
 app.get("/user/id.json", function (req, res) {
     res.json({
@@ -37,6 +48,8 @@ app.get("/user", function (req, res) {
             console.log("ERROR in get User: ", err);
         });
 });
+
+//---------------------------------------------------------------------------------
 
 app.post("/register", (req, res) => {
     let data = req.body;
@@ -63,6 +76,8 @@ app.post("/register", (req, res) => {
             });
         });
 });
+
+//---------------------------------------------------------------------------------
 
 app.post("/login", (req, res) => {
     let data = req.body;
@@ -97,6 +112,8 @@ app.post("/login", (req, res) => {
             });
         });
 });
+
+//---------------------------------------------------------------------------------
 
 app.post("/sendingCode", (req, res) => {
     let data = req.body;
@@ -163,6 +180,8 @@ app.post("/resetPassword", (req, res) => {
         );
 });
 
+//---------------------------------------------------------------------------------
+
 app.post(
     "/update-pic",
     uploader.single("profilePicture"),
@@ -195,6 +214,8 @@ app.post("/updateBio", (req, res) => {
         .catch((err) => console.log("ERROR in insert BIO: ", err));
 });
 
+//---------------------------------------------------------------------------------
+
 app.get("/getPeople", (req, res) => {
     db.findNewestPeople()
         .then((data) => {
@@ -220,6 +241,8 @@ app.get("/otheruser/:id", (req, res) => {
         })
         .catch((err) => console.log("ERROR in get User: ", err));
 });
+
+//---------------------------------------------------------------------------------
 
 app.get("/friendship/:id", (req, res) => {
     let sender = req.session.userId;
@@ -276,10 +299,43 @@ app.get("/friends.json", (req, res) => {
         .catch((err) => console.log("ERROR in get all friends status: ", err));
 });
 
+//---------------------------------------------------------------------------------
+
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "..", "client", "index.html"));
 });
 
-app.listen(process.env.PORT || 3001, function () {
-    console.log("I'm listening.");
+// app.listen(process.env.PORT || 3001, function () {
+//     console.log("I'm listening.");
+// });
+
+server.listen(process.env.PORT || 3001, function () {
+    console.log(`I'm listening on port ${process.env.PORT}.`);
+});
+
+//----------------------------------------------------------------------
+
+io.on("connection", function (socket) {
+    if (!socket.request.session.userId) {
+        return socket.disconnect(true);
+    }
+
+    const userId = socket.request.session.userId;
+    console.log(
+        `User with id: ${userId} and socket id ${socket.id}, just connected!`
+    );
+
+    socket.emit("last-10-messages", [
+        {
+            text: "A first message",
+        },
+        {
+            text: "A second message",
+        },
+    ]);
+
+    socket.on("new-message", (message) => {
+        console.log("new-message", message);
+        io.emit("add-new-message", message);
+    });
 });
