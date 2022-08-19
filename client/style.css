@@ -72,6 +72,16 @@ h2 {
         1px 36px 72px rgba(16, 16, 16, 0.1);
 }
 
+.logo2 {
+    font-family: verdana;
+    font-size: 5em;
+    color: rgba(255, 255, 255, 0.1);
+    text-shadow: 1px 1px 1px rgba(145, 145, 145, 0.1),
+        1px 2px 1px rgba(0, 0, 0, 0.1), 1px 9px 3px rgba(16, 16, 16, 0.1),
+        1px 22px 10px rgba(16, 16, 16, 0.1), 1px 18px 36px rgba(16, 16, 16, 0.1),
+        1px 36px 72px rgba(16, 16, 16, 0.1);
+}
+
 .logo:hover {
     cursor: default;
     color: rgba(255, 255, 255, 0.5);
@@ -470,6 +480,14 @@ li {
     border-radius: 1em;
     box-shadow: 3px 3px 2px 1px rgba(0, 0, 0, 0.005);
     padding-top: 1em;
+}
+
+.friendsCon2 {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    column-gap: 1em;
+    width: 100%;
+    padding-top: 2em;
 }
 
 .friendsAndWannabes {

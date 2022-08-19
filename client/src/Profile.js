@@ -29,7 +29,9 @@ export default function Profile({
             <div className="messageCon">
                 <BioEditor saveDraft={saveDraft} bio={bio} />
             </div>
-            <div className="chatCon"></div>
+            <div className="chatCon">
+                {/* <Friendsprofile /> */}
+            </div>
         </>
     );
 }

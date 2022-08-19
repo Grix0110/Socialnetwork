@@ -249,6 +249,7 @@ app.get("/friendship/:id", (req, res) => {
     let recipent = req.params.id;
     db.findFriendship(sender, recipent)
         .then((result) => {
+            // result.rows[0].isMyFriend = result.rows[0].accepted == true;
             res.json(result.rows);
         })
         .catch((err) => console.log("ERROR in find friendship: ", err));
@@ -299,6 +300,22 @@ app.get("/friends.json", (req, res) => {
         .catch((err) => console.log("ERROR in get all friends status: ", err));
 });
 
+app.get("/:id/friends.json", (req, res) => {
+    let id = req.params.id;
+    console.log("ID OF FRIENDS: ", id);
+    db.getAllFriendStatus(id)
+        .then((result) => {
+            console.log("RESULT GET ALL FRIENDS: ", result.rows);
+            res.json(result.rows);
+        })
+        .catch((err) => console.log("ERROR in get all friends status: ", err));
+});
+
+app.get("/logout", (req, res) => {
+    req.session.userId = null;
+    res.redirect("/login");
+});
+
 //---------------------------------------------------------------------------------
 
 app.get("*", function (req, res) {
@@ -332,7 +349,7 @@ io.on("connection", function (socket) {
 
     socket.on("new-message", (message) => {
         console.log("new-message", message.text);
-        
+
         db.insertMessages(message.text, userId).then(() => {
             io.emit("add-new-message", message);
         });

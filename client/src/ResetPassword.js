@@ -95,7 +95,7 @@ export default class ResetPassword extends Component {
                         <input type="submit" id="submit"></input>
                         <Link to="/login">
                             <div>
-                                <span>Click here to go back to Log in!</span>
+                                <p>⍆ Click here to go back to Log in! ⍅</p>
                             </div>
                         </Link>
                     </form>
@@ -125,7 +125,7 @@ export default class ResetPassword extends Component {
                         <input type="submit" id="submit"></input>
                         <Link to="/login">
                             <div>
-                                <span>Click here to go back to Log in!</span>
+                                <p>⍆ Click here to go back to Log in! ⍅</p>
                             </div>
                         </Link>
                     </form>
@@ -137,7 +137,7 @@ export default class ResetPassword extends Component {
                     <h1>{this.state.message}</h1>
                     <Link to="/login">
                         <div>
-                            <span>Click here to go back to Log in!</span>
+                            <p>⍆ Click here to go back to Log in! ⍅</p>
                         </div>
                     </Link>
                 </section>

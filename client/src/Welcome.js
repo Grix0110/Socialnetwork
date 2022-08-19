@@ -8,7 +8,7 @@ class Welcome extends Component {
     render() {
         return (
             <>
-                <p className="logLink"> Welcome </p>
+                <p className="logo2">G L A S S D O O R</p>
                 <BrowserRouter>
                     <Route exact path="/">
                         <Registration />

@@ -15,14 +15,10 @@ export default function FriendsAndWannabes() {
             state.friends && state.friends.filter((friend) => !friend.accepted)
     );
 
-    // console.log("wannabes inside component: ", wannabes);
-
     const friends = useSelector(
         (state) =>
             state.friends && state.friends.filter((friend) => friend.accepted)
     );
-
-    // console.log("friends inside component: ", friends);
 
     useEffect(() => {
         fetch(`/friends.json`)

@@ -41,6 +41,7 @@ export default function FriendButton() {
     }, []);
 
     const changeButtonOnClick = (url) => {
+        console.log("URL FROM FRIEND BUTTON: ", url);
         fetch(url, {
             method: "POST",
             headers: { "Content-Type": "application/json" },

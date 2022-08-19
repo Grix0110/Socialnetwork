@@ -45,10 +45,12 @@ export default class BioEditor extends Component {
                         <textarea
                             id="bioText"
                             name="bio"
-                            
                             onChange={this.onFormInputChange}
-                        >{this.props.bio}</textarea>
-                        <button className="buttonBio"
+                        >
+                            {this.props.bio}
+                        </textarea>
+                        <button
+                            className="buttonBio"
                             onClick={
                                 (this.showEditor, this.fetchNewBioToServer)
                             }
@@ -68,6 +70,9 @@ export default class BioEditor extends Component {
                         )}
                     </>
                 )}
+                <a className="logout" href="/logout">
+                    logout
+                </a>
             </section>
         );
     }
