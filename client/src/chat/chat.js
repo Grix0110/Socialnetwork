@@ -6,9 +6,10 @@ const Chat = () => {
     const messages = useSelector((state) => state.messages);
     return (
         <>
-            <h1>Chat</h1>
-            <ChatBoard messages={messages} />
-            <ChatInput buttonTitle="Senden" />
+            <section className="messCon">
+                <ChatBoard messages={messages} />
+                <ChatInput buttonTitle="Send" />
+            </section>
         </>
     );
 };

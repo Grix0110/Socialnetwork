@@ -325,17 +325,16 @@ io.on("connection", function (socket) {
         `User with id: ${userId} and socket id ${socket.id}, just connected!`
     );
 
-    socket.emit("last-10-messages", [
-        {
-            text: "A first message",
-        },
-        {
-            text: "A second message",
-        },
-    ]);
+    db.getAllMessages().then((result) => {
+        // console.log("RESULT FROM GET ALL MESSAGES: ", result.rows);
+        socket.emit("last-10-messages", result.rows);
+    });
 
     socket.on("new-message", (message) => {
-        console.log("new-message", message);
-        io.emit("add-new-message", message);
+        console.log("new-message", message.text);
+        
+        db.insertMessages(message.text, userId).then(() => {
+            io.emit("add-new-message", message);
+        });
     });
 });

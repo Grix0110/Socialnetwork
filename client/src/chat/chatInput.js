@@ -10,7 +10,7 @@ const ChatInput = ({
     const sendMessage = () => {
         const message = textareaRef.current.value;
         socket.emit("new-message", {
-            username: "username",
+            // username: "username",
             text: message,
         });
 
@@ -27,6 +27,7 @@ const ChatInput = ({
     return (
         <div className="chatInput">
             <textarea
+                className="textChat"
                 ref={textareaRef}
                 placeholder={textPlaceholder}
                 onKeyUp={onChange}

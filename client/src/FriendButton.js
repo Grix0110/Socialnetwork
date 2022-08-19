@@ -10,7 +10,7 @@ export default function FriendButton() {
 
     const buttonState = (data) => {
         let button = {};
-        console.log("DATA BUTTON: ", data[0]);
+        // console.log("DATA BUTTON: ", data[0]);
         if (data[0] == undefined) {
             button.text = "Send request";
             button.url = "/requestfriend";
@@ -24,7 +24,7 @@ export default function FriendButton() {
             button.text = "Unfriend";
             button.url = "/unfriend";
         }
-        console.log("BUTTON: ", button);
+        // console.log("BUTTON: ", button);
         return button;
     };
 

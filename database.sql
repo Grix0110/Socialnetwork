@@ -33,3 +33,12 @@ SELECT users.id, first_name, last_name, accepted, image_url FROM users
         ON (accepted = true AND recipent_id = 235 AND users.id = friendships.sender_id)
         OR (accepted = true AND sender_id = 235 AND users.id = friendships.recipent_id)
         OR (accepted = false AND recipent_id = 235 AND users.id = friendships.sender_id);
+
+CREATE TABLE chat_messages(
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users (id),
+    message VARCHAR,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO chat_messages(user_id, message) VALUES (235, 'message number three is an assurance');

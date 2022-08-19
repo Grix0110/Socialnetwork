@@ -137,3 +137,15 @@ module.exports.getAllFriendStatus = (id) => {
         [id]
     );
 };
+
+module.exports.insertMessages = (text, userId) => {
+    return db.query(
+        `INSERT INTO chat_messages (message, user_id) VALUES ($1, $2) RETURNING message, user_id`,
+        [text, userId]
+    );
+};
+
+module.exports.getAllMessages = () => {
+    return db.query(`
+    SELECT chat_messages.id, user_id, message, created_at, first_name, last_name, image_url FROM chat_messages JOIN users ON chat_messages.user_id=users.id ORDER BY chat_messages.id DESC LIMIT 10`);
+};
